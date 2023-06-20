@@ -35,9 +35,9 @@ After you're finished please remove all the comments and instructions!
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Install](#install)
-  - [Usage](#usage)
-  - [Run tests](#run-tests)
-  - [Deployment](#triangular_flag_on_post-deployment)
+  <!-- - [Usage](#usage) -->
+  <!-- - [Run tests](#run-tests) -->
+  <!-- - [Deployment](#triangular_flag_on_post-deployment) -->
 - [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
@@ -48,7 +48,7 @@ After you're finished please remove all the comments and instructions!
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 School Library <a id="about-project"></a>
+# 📖 About the Project <a id="about-project"></a>
 
 **School Library** is an app design using Object Oriented Programming method that is capable of:
 - Adding new students or teachers
@@ -56,7 +56,7 @@ After you're finished please remove all the comments and instructions!
 - Save records of who borrowed a given book and when
 
 It's based upon this diagram:
-<img src="https://raw.githubusercontent.com/microverseinc/curriculum-ruby/main/oop/images/uml_class_diagram.png?token=GHSAT0AAAAAACCMPTMQYHRLDWLMEBNRFJJ2ZEQZRLQ">
+<img src="uml_class_diagram.png">
 
 ## 🛠 Built With <a id="built-with"></a>
 
@@ -100,18 +100,12 @@ It's based upon this diagram:
 ```
 
 <br />
-<!--
+
 ### Prerequisites
-In order to run this project you need: [Postgres](https://postgresapp.com/) SQL
--->
+In order to run this project you need: [Ruby](https://www.ruby-lang.org/en/downloads/)
 
-<!--
-Example command:
+You need `Bundler` and also rubocop to check for linter errors
 
-```sh
- gem install rails
-```
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -126,19 +120,33 @@ Example commands:
   git clone https://github.com/dev89s/school-library.git
 ```
 
-<!--
+
 ### Install
 
-Install this project with: -->
-
-<!--
-Example command:
-
+After you installed ruby on your system, you can go on and installed the linter "rubocop" to check for any linter errors in your code.
+To do so, you need ruby bundler which can be installed:
 ```sh
-  cd my-project
-  gem install
+  gem install bundler
 ```
---->
+Then initialize the bundler by
+```sh
+  bundle init
+```
+
+Which will create the gem file, and then add the folloing line to the gem file
+```gem
+  gem 'rubocop', '>= 1.0', '< 2.0'
+```
+
+To install the dependencies:
+```sh
+  bundle install
+```
+
+And also to install `rubocop` for linter errors checking:
+```sh
+  gem install rubocop
+```
 
 <!-- ### Usage
 
@@ -151,18 +159,17 @@ Example command:
   rails server
 ```
 --->
-<!--
-### Run tests
 
-To run tests, run the following command: -->
+<!-- ### Run tests
 
-<!--
+To run tests, run the following command:
+
 Example command:
 
 ```sh
   bin/rails test test/models/article_test.rb
 ```
---->
+- -->
 
 <!-- ### Deployment
 
