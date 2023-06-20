@@ -43,7 +43,7 @@ After you're finished please remove all the comments and instructions!
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
-- [❓ FAQ](#faq)
+<!-- - [❓ FAQ](#faq) -->
 - [📝 License](#license)
 
 <!-- PROJECT DESCRIPTION -->
