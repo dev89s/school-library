@@ -30,7 +30,7 @@ class Person < Nameable
   end
 end
 
-person = Person.new(28, '   lion sam')
+person = Person.new(28, '   lion sammuael')
 puts person.correct_name
 
 capitalized_person = CapitalizeDecorator.new(person)

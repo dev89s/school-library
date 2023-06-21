@@ -21,6 +21,11 @@ end
 
 class TrimmerDecorator < NameDecorator
   def correct_name
-    @nameable.correct_name.strip
+    output = @nameable.correct_name.strip
+    if output.length > 10
+      output[0..9]
+    else
+      output
+    end
   end
 end
