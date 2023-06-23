@@ -124,7 +124,6 @@ class App
     rental = Rental.new(date, @persons[person_num], @books[book_num])
 
     @rentals.append(rental)
-    @rentals.each { |rental| puts rental.person.id }
     puts 'Rental created successfully'
   end
 
