@@ -1,9 +1,17 @@
 require './person'
+require './classroom'
 
 class Student < Person
-  def initialize(age, classrooom, name = 'Unknown', parent_permission: true)
+  attr_reader :classroom
+
+  def classroom=(classroom)
+    @classroom = classroom
+    classroom.students.push(self) unless classroom.students.include?(self)
+  end
+
+  def initialize(age, classroom, name = 'Unknown', parent_permission: true)
     super(age, name, parent_permission:)
-    @classrooom = classrooom
+    @classroom = classroom
   end
 
   def play_hooky
@@ -11,6 +19,9 @@ class Student < Person
   end
 end
 
-student = Student.new(30, 201, 'Sasan')
+classroom = Classroom.new('201')
 
-puts student.name, student.age, student.play_hooky
+student = Student.new(30, classroom, 'Sasan')
+puts student.classroom.label
+puts classroom.students.count
+puts student.name, student.age, student.play_hooky, student.classroom.label
