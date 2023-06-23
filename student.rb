@@ -19,9 +19,9 @@ class Student < Person
   end
 end
 
-classroom = Classroom.new('201')
+# classroom = Classroom.new('201')
 
-student = Student.new(30, classroom, 'Sasan')
-puts student.classroom.label
-puts classroom.students.count
-puts student.name, student.age, student.play_hooky, student.classroom.label
+# student = Student.new(30, classroom, 'Sasan')
+# puts student.classroom.label
+# puts classroom.students.count
+# puts student.name, student.age, student.play_hooky, student.classroom.label
