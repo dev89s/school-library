@@ -12,44 +12,6 @@ class App
     @rentals = []
   end
 
-  def begin
-    puts "Welcome to School Library App!\n"
-    command = 0
-    while command != 7
-      show_menu
-      command = gets.chomp
-      operate(command)
-    end
-  end
-
-  def show_menu
-    puts 'Please choose an option by entring a number:'
-    puts '1 - List all books'
-    puts '2 - List all people'
-    puts '3 - Create a person'
-    puts '4 - Create a book'
-    puts '5 - Create a rental'
-    puts '6 - List all rentals for a given person id'
-    puts '7 - Exit'
-  end
-
-  def operate(command)
-    case command
-    when '1'
-      list_books
-    when '2'
-      list_people
-    when '3'
-      create_person
-    when '4'
-      create_book
-    when '5'
-      create_rental
-    when '6'
-      list_rentals_by_id
-    end
-  end
-
   def list_books
     puts 'no books' unless @books.length.positive?
     @books.each do |book|
@@ -150,10 +112,3 @@ class App
     end
   end
 end
-
-def main
-  app = App.new
-  app.begin
-end
-
-main
