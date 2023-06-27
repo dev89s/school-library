@@ -194,6 +194,13 @@ Example:
 - GitHub: [@dev89s](https://github.com/dev89s)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/sasan-moshirabadi)
 
+
+👤 **Author: Damilare**
+
+- GitHub: [@githubhandle](https://github.com/Bestbynature)
+- Twitter: [@twitterhandle](https://twitter.com/Dammybest)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/damilareismailabestbynature/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
