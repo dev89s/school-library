@@ -1,7 +1,7 @@
 class FileReader
   def read_books
     book_file = File.open('books.json') if File.exist?('books.json')
-    return unless book_file
+    return [] unless book_file
 
     begin
       books = JSON.parse(book_file.read)
@@ -17,7 +17,7 @@ class FileReader
 
   def read_persons
     person_file = File.open('persons.json') if File.exist?('persons.json')
-    return unless person_file
+    return [] unless person_file
 
     begin
       persons = JSON.parse(person_file.read)
@@ -38,7 +38,7 @@ class FileReader
 
   def read_rentals(books, persons)
     rental_file = File.open('rentals.json') if File.exist?('rentals.json')
-    return unless rental_file
+    return [] unless rental_file
 
     begin
       rentals = JSON.parse(rental_file.read)
