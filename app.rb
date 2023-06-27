@@ -2,14 +2,17 @@ require './student'
 require './teacher'
 require './book'
 require './rental'
+require 'json'
+require './read_files'
 
 class App
   attr_accessor :books, :persons, :rentals
 
   def initialize
-    @books = []
-    @persons = []
-    @rentals = []
+    file_reader = FileReader.new
+    @books = file_reader.read_books
+    @persons = file_reader.read_persons
+    @rentals = file_reader.read_rentals(@books, @persons)
   end
 
   def list_books
@@ -110,5 +113,37 @@ class App
     @rentals.each do |rental|
       puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" if rental.person.id == id
     end
+  end
+
+  def preserve_data
+    preserve_books if @books.length.positive?
+    preserve_persons if @persons.length.positive?
+    preserve_rentals if @rentals.length.positive?
+  end
+
+  def preserve_books
+    books = @books.map { |book| { title: book.title, author: book.author } }
+    file = File.open('books.json', 'w')
+    file.write(books.to_json)
+  end
+
+  def preserve_persons
+    persons = @persons.map do |person|
+      if person.instance_of?(Teacher)
+        { type: 'Teacher', name: person.name, age: person.age, specialization: person.specialization }
+      elsif person.instance_of?(Student)
+        { type: 'Student', name: person.name, age: person.age, parent_permission: person.parent_permission }
+      end
+    end
+    file = File.open('persons.json', 'w')
+    file.write(persons.to_json)
+  end
+
+  def preserve_rentals
+    rentals = @rentals.map do |rental|
+      { date: rental.date, person_name: rental.person.name, book_title: rental.book.title }
+    end
+    file = File.open('rentals.json', 'w')
+    file.write(rentals.to_json)
   end
 end
