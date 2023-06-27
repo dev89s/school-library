@@ -3,70 +3,16 @@ require './teacher'
 require './book'
 require './rental'
 require 'json'
+require './read_files'
 
 class App
   attr_accessor :books, :persons, :rentals
 
   def initialize
-    @books = []
-    @persons = []
-    @rentals = []
-  end
-
-  def read_date_from_files
-    read_persons
-    read_books
-    read_rentals
-  end
-
-  def read_books
-    book_file = File.open('books.json') if File.exist?('books.json')
-    return unless book_file
-
-    begin
-      books = JSON.parse(book_file.read)
-    rescue StandardError
-      return
-    end
-    books.each do |book|
-      @books.append(Book.new(book['title'], book['author']))
-    end
-  end
-
-  def read_persons
-    person_file = File.open('persons.json') if File.exist?('persons.json')
-    return unless person_file
-
-    begin
-      persons = JSON.parse(person_file.read)
-    rescue StandardError
-      return
-    end
-
-    persons.each do |person|
-      if person['type'] == 'Teacher'
-        @persons.append(Teacher.new(person['age'], person['specialization'], person['name']))
-      elsif person['type'] == 'Student'
-        @persons.append(Student.new(person['age'], person['name'], person['parent_permission']))
-      end
-    end
-  end
-
-  def read_rentals
-    rental_file = File.open('rentals.json') if File.exist?('rentals.json')
-    return unless rental_file
-
-    begin
-      rentals = JSON.parse(rental_file.read)
-    rescue StandardError
-      return
-    end
-
-    rentals.each do |rental|
-      person = @persons.find { |p| p.name == rental['person_name'] }
-      book = @books.find { |b| b.title == rental['book_title'] }
-      @rentals.append(Rental.new(rental['date'], person, book))
-    end
+    file_reader = FileReader.new
+    @books = file_reader.read_books
+    @persons = file_reader.read_persons
+    @rentals = file_reader.read_rentals(@books, @persons)
   end
 
   def list_books
