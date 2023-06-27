@@ -2,6 +2,7 @@ require './app'
 
 def main
   app = App.new
+  app.read_date_from_files
 
   puts "Welcome to School Library App!\n"
   command = 0

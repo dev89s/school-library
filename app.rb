@@ -13,6 +13,62 @@ class App
     @rentals = []
   end
 
+  def read_date_from_files
+    read_persons
+    read_books
+    read_rentals
+  end
+
+  def read_books
+    book_file = File.open('books.json') if File.exist?('books.json')
+    return unless book_file
+
+    begin
+      books = JSON.parse(book_file.read)
+    rescue StandardError
+      return
+    end
+    books.each do |book|
+      @books.append(Book.new(book['title'], book['author']))
+    end
+  end
+
+  def read_persons
+    person_file = File.open('persons.json') if File.exist?('persons.json')
+    return unless person_file
+
+    begin
+      persons = JSON.parse(person_file.read)
+    rescue StandardError
+      return
+    end
+
+    persons.each do |person|
+      if person['type'] == 'Teacher'
+        @persons.append(Teacher.new(person['age'], person['specialization'], person['name']))
+      elsif person['type'] == 'Student'
+        @persons.append(Student.new(person['age'], person['name'], person['parent_permission']))
+      end
+    end
+  end
+
+  def read_rentals
+    rental_file = File.open('rentals.json') if File.exist?('rentals.json')
+    return unless rental_file
+
+    begin
+      rentals = JSON.parse(rental_file.read)
+    rescue StandardError
+      return
+    end
+
+    rentals.each do |rental|
+      person = @persons.find { |p| p.name == rental['person_name'] }
+      book = @books.find { |b| b.title == rental['book_title'] }
+      @rentals.append(Rental.new(rental['date'], person, book))
+    end
+  end
+
   def list_books
     puts 'no books' unless @books.length.positive?
     @books.each do |book|
@@ -120,7 +176,7 @@ class App
   end
 
   def preserve_books
-    books = @books.map { |book| [book.title, book.author] }
+    books = @books.map { |book| { title: book.title, author: book.author } }
     file = File.open('books.json', 'w')
     file.write(books.to_json)
   end
@@ -128,9 +184,9 @@ class App
   def preserve_persons
     persons = @persons.map do |person|
       if person.instance_of?(Teacher)
-        ['Teacher', person.name, person.age, person.specialization]
+        { type: 'Teacher', name: person.name, age: person.age, specialization: person.specialization }
       elsif person.instance_of?(Student)
-        ['Student', person.name, person.age, person.parent_permission]
+        { type: 'Student', name: person.name, age: person.age, parent_permission: person.parent_permission }
       end
     end
     file = File.open('persons.json', 'w')
@@ -139,9 +195,8 @@ class App
 
   def preserve_rentals
     rentals = @rentals.map do |rental|
-      [rental.date, rental.person.name, rental.book.title]
+      { date: rental.date, person_name: rental.person.name, book_title: rental.book.title }
     end
-    puts rentals
     file = File.open('rentals.json', 'w')
     file.write(rentals.to_json)
   end
