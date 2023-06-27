@@ -1,1 +1,1 @@
-[{"type":"Teacher","name":"Steve","age":45,"specialization":"Doctor"},{"type":"Student","name":true,"age":12,"parent_permission":true},{"type":"Teacher","name":"Teacher Manny","age":45,"specialization":"Geography"}]
+[{"type":"Teacher","name":"Steve","age":45,"specialization":"Doctor"},{"type":"Teacher","name":"Teacher Manny","age":45,"specialization":"Geography"},{"type":"Student","name":"Sasan","age":25,"parent_permission":true}]

@@ -29,7 +29,8 @@ class FileReader
       if person['type'] == 'Teacher'
         persons_arr.append(Teacher.new(person['age'], person['specialization'], person['name']))
       elsif person['type'] == 'Student'
-        persons_arr.append(Student.new(person['age'], person['name'], person['parent_permission']))
+        persons_arr.append(Student.new(person['age'], nil, person['name'],
+                                       parent_permission: person['parent_permission']))
       end
     end
     persons_arr
