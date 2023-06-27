@@ -34,4 +34,22 @@ class FileReader
     end
     persons_arr
   end
+
+  def read_rentals(books, persons)
+    rental_file = File.open('rentals.json') if File.exist?('rentals.json')
+    return unless rental_file
+
+    begin
+      rentals = JSON.parse(rental_file.read)
+    rescue StandardError
+      return
+    end
+    rentals_arr = []
+    rentals.each do |rental|
+      person = persons.find { |p| p.name == rental['person_name'] }
+      book = books.find { |b| b.title == rental['book_title'] }
+      rentals_arr.append(Rental.new(rental['date'], person, book))
+    end
+    rentals_arr
+  end
 end
